@@ -67,7 +67,7 @@ Here are the following CLI tools available :
 
 ### Composer
 
-`purge c`
+`purge composer` or `purge c`
 
 This command will check if you have a `composer.json` file, otherwise you are in the wrong folder ! ;)
 It will check if there's a `composer.lock` file and a `vendor` folder and delete them.
@@ -75,7 +75,7 @@ It will then run `composer install` to reinstall the packages according to the `
 
 ### NPM
 
-`purge n`
+`purge npm` or `purge n`
 
 This command will check if there's a `package.json` file, otherwise you are in the wrong folder ! ;)
 It will check if there's a `package-lock.json` file and a `node_modules` folder and delete them.
@@ -93,7 +93,7 @@ It will then run `yarn install` to reinstall the packages according to the `pack
 
 ### Laravel Artisan
 
-`purge a clean`
+`purge artisan clean` or `purge a clean`
 
 It will help you clean all the cache that Laravel has in one command!
 
@@ -101,15 +101,17 @@ The following caches are dumped : cache, view, config, route.
 
 And also composer's cache `composer dump-autoload`
 
-`purge a freshseed`
+`purge artisan freshseed ` or `purge a freshseed`
 
 If you want to have a clean database populated with the seeder's datas, then it's your go to command.
 
 ### Laravel Horizon
 
-`purge h`
+`purge horizon` or `purge h`
 
 ### Puuurge
+
+`puuurge`
 
 Run all of the commands listed above to have the perfect tool to restart from scratch!
 
