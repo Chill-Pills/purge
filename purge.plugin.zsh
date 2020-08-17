@@ -1,32 +1,79 @@
 #!/bin/bash
 
-function purgeTitle() {
-titleGray <<'TITLE'
+function purge() {
+    purgeTitle
+    textGray 'brought to you by Capsule\n'
 
-██████╗ ██╗   ██╗██████╗  ██████╗ ███████╗
-██╔══██╗██║   ██║██╔══██╗██╔════╝ ██╔════╝
-██████╔╝██║   ██║██████╔╝██║  ███╗█████╗  
-██╔═══╝ ██║   ██║██╔══██╗██║   ██║██╔══╝  
-██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗
-╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-                                                  
-TITLE
+    if [[ $1 =~ ^(a|artisan)$ ]] then
+        purgeLaravelArtisan "$2"
+    elif [[ $1 =~ ^(c|composer)$ ]] then
+        purgeComposer
+    elif [[ $1 =~ ^(n|npm)$ ]] then
+        purgeNpm
+    elif [[ $1 =~ ^(y|yarn)$ ]] then
+        purgeYarn
+    elif [[ $1 =~ ^(h|horizon)$ ]] then
+        purgeLaravelHorizon
+    elif [[ $1 =~ ^(help|list)$ ]] then
+        purgeList
+    else
+        purgeList
+    fi
 }
 
-function titleGray() {
-    while read -r line; do textGray "$line"; done; 
+function purgeList() {
+
+    textBold "purge artisan\n"
+
+    textBold "    purge artisan clean\n"
+
+    textItalic "        Clear all laravel's caches.\n"
+
+    textBold "    purge artisan freshseed\n"
+
+    textItalic "        Clear database and run seeders.\n"
+
+    textBold "purge composer\n"
+
+    textItalic "        Clear vendor folder and lock file and reinstall everything.\n"
+
+    textBold "purge npm"
+
+    textItalic "        Clear node_modules folder and lock file and reinstall everything.\n"
+
+    textBold "purge yarn\n"
+
+    textItalic "        Clear node_modules folder and lock file and reinstall everything.\n"
+
+    textBold "purge horizon\n"
+
+    textItalic "        Stop horizon, clear cache, run horizon back up.\n"
+
+    textBold "puuurge\n"
+
+    textItalic "        Run every listed commands \n"
+
 }
 
-function textGray() {
-    echo -e "\e[37m$1\e[0m";
+function puuurge() {
+    purgeTitle
+    textGray 'brought to you by Capsule\n'
+
+    if ! [[ -e artisan ]] then
+        textBold "Artisan command not found"
+        echo "Check if you are in your project's directory! ;)"
+    else
+        purgeLaravelArtisan "clean"
+        purgeLaravelArtisan "freshseed"
+        purgeComposer
+        purgeNpm
+        purgeYarn
+        purgeLaravelHorizon
+    fi
 }
 
-function textBold() {
-    echo -e "\e[1m$1\e[0m";
-}
-
-function purgeArtisan() {
-    textGray 'Artisan purge brought to you by Capsule'
+function purgeLaravelArtisan() {
+    textGray 'Artisan purge brought to you by Capsule\n'
 
     if ! [[ -e artisan ]] then
         textBold "Artisan command not found"
@@ -61,7 +108,7 @@ function purgeArtisan() {
 }
 
 function purgeComposer() {
-    textGray 'Composer purge brought to you by Capsule'
+    textGray 'Composer purge brought to you by Capsule\n'
 
     if ! [[ -e composer.json ]] then
         textBold "There's no composer.json file found."
@@ -83,7 +130,7 @@ function purgeComposer() {
 }
 
 function purgeNpm() {
-    textGray 'Npm purge brought to you by Capsule'
+    textGray 'Npm purge brought to you by Capsule\n'
 
     if ! [[ -e package.json ]] then
         textBold "There's no package.json file found."
@@ -105,7 +152,7 @@ function purgeNpm() {
 }
 
 function purgeYarn() {
-    textGray 'Yarn purge brought to you by Capsule'
+    textGray 'Yarn purge brought to you by Capsule\n'
 
     if ! [[ -e package.json ]] then
         textBold "There's no package.json file found."
@@ -127,38 +174,61 @@ function purgeYarn() {
 }
 
 function purgeLaravelHorizon() {
-    textGray 'Laravel Horizon purge brought to you by Capsule'
-    sudo -v
-    echo '&#x1f5d1 Stop horizon service'
-    command systemctl stop horizon.service
-    echo "Clean all Laravel\'s caches"
-    purgeArtisan "clean"
-    echo '&#x1f5d1 Start horizon service back up'
-    command systemctl start horizon.service
-    echo "&#x1f5d1 Check horizon service's status"
-    command systemctl status horizon.service
+    textGray 'Laravel Horizon purge brought to you by Capsule\n'
+
+    if ! [[ -e artisan ]] then
+        textBold "Artisan command not found"
+        echo "Check if you are in your project's directory! ;)"
+    else
+        sudo -v
+        echo '\U0001f53d Stop horizon service'
+        command systemctl stop horizon.service
+        echo "\U0001f5d1  Clean all Laravel's caches"
+        purgeLaravelArtisan "clean"
+        echo '\U0001f53c Start horizon service back up'
+        command systemctl start horizon.service
+        echo "\U0001f441 Check horizon service's status"
+        command systemctl status horizon.service
+    fi
 }
 
-function purge() {
-    purgeTitle
+# Helper functions
 
-    if [[ $1 =~ ^(a|artisan)$ ]] then
-        purgeArtisan "$2"
-    elif [[ $1 ==~ ^(c|composer)$ ]] then
-        purgeComposer
-    elif [[ $1 ==~ ^(n|npm)$ ]] then
-        purgeNpm
-    elif [[ $1 ==~ ^(y|yarn)$ ]] then
-        purgeYarn
-    elif [[ $1 ==~ ^(h|horizon)$ ]] then
-        purgeLaravelHorizon
-    fi
+function purgeTitle() {
+titleGray <<'TITLE'
+
+██████╗ ██╗   ██╗██████╗  ██████╗ ███████╗
+██╔══██╗██║   ██║██╔══██╗██╔════╝ ██╔════╝
+██████╔╝██║   ██║██████╔╝██║  ███╗█████╗  
+██╔═══╝ ██║   ██║██╔══██╗██║   ██║██╔══╝  
+██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗
+╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+                                                  
+TITLE
+}
+
+function titleGray() {
+    while read -r line; do textGray "$line"; done; 
+}
+
+function textGray() {
+    echo -e "\e[37m$1\e[0m";
+}
+
+function textItalic() {
+    echo -e "\e[3m$1\e[0m";
+}
+
+function textBold() {
+    echo -e "\e[1m$1\e[0m";
 }
 
 function zsource() {
     echo "Sourcing oh-my-zsh rc file"
     source ~/.zshrc
 }
+
+# Aliases
 
 alias pc="purge composer"
 alias pn="purge npm"

@@ -109,23 +109,58 @@ If you want to have a clean database populated with the seeder's datas, then it'
 
 `purge h`
 
-### Aliases
+### Puuurge
+
+Run all of the commands listed above to have the perfect tool to restart from scratch!
+
+You can let all your anger go as you type this specific command!
+
+That's why we give you a lot of aliases so the [2-10] `u` letter can begin to be your new negativity destroyer.
+
+Go ahead ;)
+
+
+`puurge` or  
+`puuurge` or  
+`puuuurge` or  
+`puuuuurge` or  
+`puuuuuurge` or  
+`puuuuuuurge` or  
+`puuuuuuuurge` or  
+`puuuuuuuuurge` or  
+`puuuuuuuuuurge`  
+
+![Rick & Morty, Purge, Adult Swim](https://i.ytimg.com/vi/tJK9hh1j0Ag/maxresdefault.jpg)
+
+## Aliases
 
 Since the point of this CLI tools is to help get fasters by bundling commands,
 we think that the command itself shouln't be painful to type. 
 That's why we added out of the box's aliases to help you type faster!
 
-`purge composer` or `purge c` or `pc`
+`purge composer` or  
+`purge c` or  
+`pc`  
 
-`purge npm` or `purge n` or `pn`
+`purge npm` or  
+`purge n` or  
+`pn`  
 
-`purge yarn` or `purge y` or `py`
+`purge yarn` or  
+`purge y` or  
+`py`  
 
-`purge artisan clean` or `purge a clean` or `pac`
+`purge artisan clean` or  
+`purge a clean` or  
+`pac`  
 
-`purge artisan freshseed` or `purge a freshseed` or `paf`
+`purge artisan freshseed` or  
+`purge a freshseed` or  
+`paf`  
 
-`purge horizon` or `purge h` or `ph`
+`purge horizon` or  
+`purge h` or  
+`ph`  
 
 ## Improvements
 
