@@ -128,20 +128,29 @@ function purgeYarn() {
 
 function purgeLaravelHorizon() {
     textGray 'Laravel Horizon purge brought to you by Capsule'
+    sudo -v
+    echo '&#x1f5d1 Stop horizon service'
+    command systemctl stop horizon.service
+    echo "Clean all Laravel\'s caches"
+    purgeArtisan "clean"
+    echo '&#x1f5d1 Start horizon service back up'
+    command systemctl start horizon.service
+    echo "&#x1f5d1 Check horizon service's status"
+    command systemctl status horizon.service
 }
 
 function purge() {
     purgeTitle
 
-    if [[ $1 == "a" ]] then
+    if [[ $1 =~ ^(a|artisan)$ ]] then
         purgeArtisan "$2"
-    elif [[ $1 == "c" ]] then
+    elif [[ $1 ==~ ^(c|composer)$ ]] then
         purgeComposer
-    elif [[ $1 == "n" ]] then
+    elif [[ $1 ==~ ^(n|npm)$ ]] then
         purgeNpm
-    elif [[ $1 == "y" ]] then
+    elif [[ $1 ==~ ^(y|yarn)$ ]] then
         purgeYarn
-    elif [[ $1 == "h" ]] then
+    elif [[ $1 ==~ ^(h|horizon)$ ]] then
         purgeLaravelHorizon
     fi
 }
@@ -150,3 +159,10 @@ function zsource() {
     echo "Sourcing oh-my-zsh rc file"
     source ~/.zshrc
 }
+
+alias pc="purge composer"
+alias pn="purge npm"
+alias py="purge yarn"
+alias pac="purge artisan clean"
+alias paf="purge artisan freshseed"
+alias ph="purge horizon"
