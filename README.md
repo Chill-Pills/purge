@@ -83,7 +83,7 @@ It will then run `npm install` to reinstall the packages according to the `packa
 
 ### Yarn
 
-`purge y`
+`purge yarn` or `purge y`
 
 _This is the same behavior as the previous command but using Yarn instead of NPM._
 
