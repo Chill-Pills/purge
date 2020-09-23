@@ -9,7 +9,7 @@
            
 ```
 
-Purge is a small CLI tools that helps gives you bundled command in the web ecosystem.
+Purge is a small CLI tool that helps gives you bundled command in the web ecosystem.
 
 ## Installation
 
