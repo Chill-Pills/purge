@@ -9,21 +9,21 @@
            
 ```
 
-Purge is a small CLI tool that helps gives you bundled command in the web ecosystem.
+Purge is a small CLI tool that helps giving you bundled commands in the web ecosystem.
 
 ## Installation
 
 This bash script is made to the right format to be imported as an external plugin for Oh-my-Zsh. 
 You just need to download it to the specific Oh-my-Zsh folder or clone it with git to be able to pull new updates.
 
-Verify in `.zshrc` file, if you have declared a `ZSH_CUSTOM` variable pointing to a specific folder, if so you need to put the plugin in that directory.
+Verify in `.zshrc` file, if you have declared a `ZSH_CUSTOM` variable pointing to a specific folder. If so, you need to put the plug-in in that directory.
 Otherwise, the default path where to put the plugin is `.oh-my-zsh/custom/plugins`
 
 ```
 cd "$ZSH_CUSTOM/plugins"
 ```
 
-or if you don't have a `plugins` folder yet
+if you don't have a `plugins` folder yet
 
 ```
 cd $ZSH_CUSTOM
@@ -37,7 +37,7 @@ then download the plugin
 git clone https://github.com/Chill-Pills/purge.git
 ```
 
-In your `.zshrc` file you can now add the plugin
+In your `.zshrc` file, you can now add the plugin
 
 ```
 plugins=(purge)
@@ -67,43 +67,45 @@ Here are the following CLI tools available :
 
 ### Composer
 
-`purge composer` or `purge c`
+`purge composer` or `purge c` or `pc`
 
-This command will check if you have a `composer.json` file, otherwise you are in the wrong folder ! ;)
+This command will check if you have a `composer.json` file, otherwise you are in the wrong folder ;)
 It will check if there's a `composer.lock` file and a `vendor` folder and delete them.
 It will then run `composer install` to reinstall the packages according to the `composer.json` file.
 
 ### NPM
 
-`purge npm` or `purge n`
+`purge npm` or `purge n` or `pn`
 
-This command will check if there's a `package.json` file, otherwise you are in the wrong folder ! ;)
+This command will check if there's a `package.json` file, otherwise you are in the wrong folder ;)
 It will check if there's a `package-lock.json` file and a `node_modules` folder and delete them.
 It will then run `npm install` to reinstall the packages according to the `package.json` file.
 
 ### Yarn
 
-`purge yarn` or `purge y`
+`purge yarn` or `purge y` or `py`
 
 _This is the same behavior as the previous command but using Yarn instead of NPM._
 
-This command will check if there's a `package.json` file, otherwise you are in the wrong folder ! ;)
+This command will check if there's a `package.json` file, otherwise you are in the wrong folder ;)
 It will check if there's a `package-lock.json` file and a `node_modules` folder and delete them.
 It will then run `yarn install` to reinstall the packages according to the `package.json` file.
 
 ### Laravel Artisan
 
-`purge artisan clean` or `purge a clean`
+`purge artisan clean` or `purge a clean` or `pac`
 
-It will help you clean all the cache that Laravel has in one command!
+It will help you clean all the cache that Laravel has in one command !
 
 The following caches are dumped : cache, view, config, route.
 
 And also composer's cache `composer dump-autoload`
 
-`purge artisan freshseed ` or `purge a freshseed`
+`purge artisan freshseed ` or `purge a freshseed` or `paf`
 
 If you want to have a clean database populated with the seeder's datas, then it's your go to command.
+
+It 
 
 ### Laravel Horizon
 
