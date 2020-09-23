@@ -105,11 +105,14 @@ And also composer's cache `composer dump-autoload`
 
 If you want to have a clean database populated with the seeder's datas, then it's your go to command.
 
-It 
+It calls the two following commands : 
+
+`php artisan migrate:fresh`
+`php artisan db:seed`
 
 ### Laravel Horizon
 
-`purge horizon` or `purge h`
+`purge horizon` or `purge h` or `ph`
 
 ### Puuurge
 
@@ -117,7 +120,7 @@ It
 
 Run all of the commands listed above to have the perfect tool to restart from scratch!
 
-You can let all your anger go as you type this specific command!
+You can let all your anger go as you type this specific command !
 
 That's why we give you a lot of aliases so the [2-10] `u` letter can begin to be your new negativity destroyer.
 
@@ -138,7 +141,7 @@ Go ahead ;)
 
 ## Aliases
 
-Since the point of this CLI tools is to help get fasters by bundling commands,
+Since the point of this CLI tools is to help get faster bundling commands,
 we think that the command itself shouln't be painful to type. 
 That's why we added out of the box's aliases to help you type faster!
 
@@ -168,9 +171,13 @@ That's why we added out of the box's aliases to help you type faster!
 
 ## Improvements
 
-If you have any ideas or improvment that can be made, please create an issue in this repository so we can discuss it furthermore! ;)
+If you have any ideas or improvment that can be made, please create an issue in this repository so we can discuss it furthermore ! ;)
 
 - Let NPM clean specify `dev` or `production` to rebuild after
 - Let Yarn clean specify `dev` or `production` to rebuild after
 - Command to install Horizon's service with systemd or supervisor for Mac or Ubuntu
 - Let Horizon purge be able to specify systemd or supervisor
+
+- Command to set up Horizon in a new window independant from project terminals
+- Command to set up Websocket in a new window independent from project terminals
+- Command to set up Horizon, Websockets, etc in new windows at the same time independent from project terminals
