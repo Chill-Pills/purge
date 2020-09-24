@@ -136,7 +136,7 @@ function purgeNpm() {
         textBold "There's no package.json file found."
         echo "Check if you are in your project's directory! ;)"
     else
-        if [[ -e "yarn.lock" ]] then
+        if [[ -e "package-lock.json" ]] then
             echo "Removing npm lock file"
             command rm package-lock.json
         fi
