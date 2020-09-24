@@ -179,6 +179,7 @@ If you have any ideas or improvment that can be made, please create an issue in 
 - Let Yarn clean specify `dev` or `production` to rebuild after
 - Command to install Horizon's service with systemd or supervisor for Mac or Ubuntu
 - Let Horizon purge be able to specify systemd or supervisor
+- Let Horizon purge restart redis daemon also
 
 - Command to set up Horizon in a new window independant from project terminals
 - Command to set up Websocket in a new window independent from project terminals
