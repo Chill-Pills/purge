@@ -65,6 +65,12 @@ The CLI tools has multiple commands to manage different CLI tools.
 
 Here are the following CLI tools available :
 
+### List of command
+
+`purge` or `purge help` or `purge list`
+
+If you want to see a list of all the available command.
+
 ### Composer
 
 `purge composer` or `purge c` or `pc`
@@ -92,6 +98,10 @@ It will check if there's a `package-lock.json` file and a `node_modules` folder 
 It will then run `yarn install` to reinstall the packages according to the `package.json` file.
 
 ### Laravel Artisan
+
+`purge artisan version` or `purge a version` or `pav`
+
+It will show you the version of the Laravel Framework since php artisan shows it on top of all of the commands.
 
 `purge artisan clean` or `purge a clean` or `pac`
 
