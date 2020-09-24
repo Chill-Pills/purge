@@ -173,14 +173,8 @@ That's why we added out of the box's aliases to help you type faster!
 
 If you have any ideas or improvment that can be made, please create an issue in this repository so we can discuss it furthermore ! ;)
 
-- Create a purge list command
-
 - Let NPM clean specify `dev` or `production` to rebuild after
 - Let Yarn clean specify `dev` or `production` to rebuild after
 - Command to install Horizon's service with systemd or supervisor for Mac or Ubuntu
 - Let Horizon purge be able to specify systemd or supervisor
 - Let Horizon purge restart redis daemon also
-
-- Command to set up Horizon in a new window independant from project terminals
-- Command to set up Websocket in a new window independent from project terminals
-- Command to set up Horizon, Websockets, etc in new windows at the same time independent from project terminals
