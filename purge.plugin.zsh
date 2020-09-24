@@ -233,6 +233,7 @@ function zsource() {
 alias pc="purge composer"
 alias pn="purge npm"
 alias py="purge yarn"
+alias pav="purge artisan version"
 alias pac="purge artisan clean"
 alias paf="purge artisan freshseed"
 alias ph="purge horizon"
