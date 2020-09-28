@@ -244,7 +244,7 @@ DAEMONSUPERVISOR
 
 
         elif [[ "$daemonManager" =~ ^(systemd)$ ]] then
-            if [[ -d "/etc/systemd/system"]] then
+            if [[ -d "/etc/systemd/system" ]] then
                 cat > "/etc/systemd/system/laravel-horizon-$directoryName.service" <<DAEMONSYSTEMD
 [Unit]
 Description=laravel-horizon-$directoryName
