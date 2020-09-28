@@ -202,19 +202,22 @@ function purgeInstallDaemonLaravelHorizon() {
     if ! [[ -e artisan ]] then
         echo "Check if you are in your project's directory! ;)"
     else
-        echo 'We need sudo access to create daemons. :)'
+        currentDirectory=`pwd`
+        directoryName=`basename $currentDirectory`
+
+        echo -n 'Do you want to use supervisor or systemd? [supervisor/systemd] : '
+        read daemonManager
+        echo -n 'What user will run the daemon? : '
+        read user
+
+        echo 'We need sudo access to create daemons :)'
         sudo -v #ask password beforehand
-        currentDirectory = $(pwd)
 
-        read -p 'Do you want to use supervisor or systemd? [supervisor/systemd]' daemonManager
-        read -p 'What user will run the daemon?' user
+        if [[ "$daemonManager" =~ ^(supervisor)$ ]] then
 
-        if [[ $daemonManager =~ ^[supervisor]$ ]]
-        then
-
-            # cat > /etc/supervisor/conf.d/laravel-horizon.conf <<DAEMONSUPERVISOR
-            cat <<DAEMONSUPERVISOR
-[program:laravel-horizon]
+            if [[ -d "/etc/supervisor/conf.d" ]] then
+                cat > "/etc/supervisor/conf.d/laravel-horizon-$directoryName.conf" <<DAEMONSUPERVISOR
+[program:laravel-horizon-$directoryName]
 directory=$currentDirectory/
 command=/usr/bin/php artisan horizon
 
@@ -225,26 +228,52 @@ user=$user
 numprocs=1
 startsecs=1
 redirect_stderr=true
-stdout_logfile=/home/forge/.forge/daemon-589083.log
+#stdout_logfile=/home/forge/.forge/daemon-589083.log
 DAEMONSUPERVISOR
+                echo "The daemon file has been created here : /etc/supervisor/conf.d/laravel-horizon-$directoryName.conf"
 
-        elif [[ $daemonManager =~ ^[systemd]$ ]]
+                # reread configuration
+                echo '\U0001f53c Read supervisor configuration'
+                command supervisorctl reread
+                # start/stop new/old processes
+                echo '\U0001f53c Start new process'
+                command supervisorctl update
+            else
+                echo "Supervisor doesn't seems to be installed (/etc/supervisor/conf.d)"
+            fi
 
-            # cat > /etc/systemd/system/laravel-horizon.service <<DAEMONSYSTEMD
-            cat <<DAEMONSYSTEMD
+
+        elif [[ "$daemonManager" =~ ^(systemd)$ ]] then
+            if [[ -d "/etc/systemd/system"]] then
+                cat > "/etc/systemd/system/laravel-horizon-$directoryName.service" <<DAEMONSYSTEMD
 [Unit]
-Description=LaravelHorizon
+Description=laravel-horizon-$directoryName
 Requires=network.target
 
 [Service]
 User=$user
 ExecStart=/usr/bin/php $currentDirectory/artisan horizon
 ExecStop=/usr/bin/php $currentDirectory/artisan horizon:terminate
+TimeoutSec=30
+Restart=on-failure
+RestartSec=30
+StartLimitInterval=350
+StartLimitBurst=10
 
 [Install]
 WantedBy=multi-user.target
 DAEMONSYSTEMD
+                echo "The daemon file has been created here : /etc/systemd/system/laravel-horizon-$directoryName.service"
 
+                echo '\U0001f53c Enable horizon service'
+                command systemctl enable "laravel-horizon-$directoryName.conf"
+                echo '\U0001f53c Start horizon service up'
+                command systemctl start  "laravel-horizon-$directoryName.conf"
+                echo "\U0001f441 Check horizon service's status"
+                command systemctl status "laravel-horizon-$directoryName.conf"
+            else
+                echo "systemd doesn't seems to be installed (/etc/systemd/system)"
+            fi
         fi
     fi
 }
