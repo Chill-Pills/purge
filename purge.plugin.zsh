@@ -25,6 +25,10 @@ function purgeList() {
 
     textBold "purge artisan\n"
 
+    textBold "    purge artisan version\n"
+
+    textItalic "        Show current laravel framework's version.\n"
+
     textBold "    purge artisan clean\n"
 
     textItalic "        Clear all laravel's caches.\n"
@@ -102,8 +106,8 @@ function purgeLaravelArtisan() {
         elif [[ $1 == "version" ]] then
 
             command php artisan | grep "Laravel Framework"
-            
-        fi  
+
+        fi
     fi
 }
 
@@ -118,7 +122,7 @@ function purgeComposer() {
             echo "Removing Composer lock file"
             command rm composer.lock
         fi
-        
+
         if [[ -d "vendor" ]] then
             echo "Removing Composer vendor directory"
             command rm -rf vendor
@@ -192,6 +196,59 @@ function purgeLaravelHorizon() {
     fi
 }
 
+function purgeInstallDaemonLaravelHorizon() {
+    textGray 'Laravel Horizon daemon installer brought to you by Capsule\n'
+
+    if ! [[ -e artisan ]] then
+        echo "Check if you are in your project's directory! ;)"
+    else
+        echo 'We need sudo access to create daemons. :)'
+        sudo -v #ask password beforehand
+        currentDirectory = $(pwd)
+
+        read -p 'Do you want to use supervisor or systemd? [supervisor/systemd]' daemonManager
+        read -p 'What user will run the daemon?' user
+
+        if [[ $daemonManager =~ ^[supervisor]$ ]]
+        then
+
+            # cat > /etc/supervisor/conf.d/laravel-horizon.conf <<DAEMONSUPERVISOR
+            cat <<DAEMONSUPERVISOR
+[program:laravel-horizon]
+directory=$currentDirectory/
+command=/usr/bin/php artisan horizon
+
+process_name=%(program_name)s_%(process_num)02d
+autostart=true
+autorestart=true
+user=$user
+numprocs=1
+startsecs=1
+redirect_stderr=true
+stdout_logfile=/home/forge/.forge/daemon-589083.log
+DAEMONSUPERVISOR
+
+        elif [[ $daemonManager =~ ^[systemd]$ ]]
+
+            # cat > /etc/systemd/system/laravel-horizon.service <<DAEMONSYSTEMD
+            cat <<DAEMONSYSTEMD
+[Unit]
+Description=LaravelHorizon
+Requires=network.target
+
+[Service]
+User=$user
+ExecStart=/usr/bin/php $currentDirectory/artisan horizon
+ExecStop=/usr/bin/php $currentDirectory/artisan horizon:terminate
+
+[Install]
+WantedBy=multi-user.target
+DAEMONSYSTEMD
+
+        fi
+    fi
+}
+
 # Helper functions
 
 function purgeTitle() {
@@ -199,16 +256,16 @@ titleGray <<'TITLE'
 
 ██████╗ ██╗   ██╗██████╗  ██████╗ ███████╗
 ██╔══██╗██║   ██║██╔══██╗██╔════╝ ██╔════╝
-██████╔╝██║   ██║██████╔╝██║  ███╗█████╗  
-██╔═══╝ ██║   ██║██╔══██╗██║   ██║██╔══╝  
+██████╔╝██║   ██║██████╔╝██║  ███╗█████╗
+██╔═══╝ ██║   ██║██╔══██╗██║   ██║██╔══╝
 ██║     ╚██████╔╝██║  ██║╚██████╔╝███████╗
 ╚═╝      ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
-                                                  
+
 TITLE
 }
 
 function titleGray() {
-    while read -r line; do textGray "$line"; done; 
+    while read -r line; do textGray "$line"; done;
 }
 
 function textGray() {
